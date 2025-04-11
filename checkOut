@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+
+public class CheckOut {
+    private ArrayList<String> selectedShoes;
+    private ArrayList<Double> prices;
+
+    public CheckOut() {
+        selectedShoes = new ArrayList<>();
+        prices = new ArrayList<>();
+    }
+
+    public void addItem(String shoe, double price) {
+        selectedShoes.add(shoe);
+        prices.add(price);
+        System.out.println(shoe + " has been added to your cart.");
+    }
+
+    public void printCart() {
+        System.out.println("Your Cart:");
+        double total = 0.0;
+        for (int i = 0; i < selectedShoes.size(); i++) {
+            System.out.println("- " + selectedShoes.get(i) + ": $" + prices.get(i));
+            total += prices.get(i);
+        }
+        System.out.println("Total: $" + total);
+    }
+}
