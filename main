@@ -1,1 +1,64 @@
+import java.util.HashMap;
+import java.util.Scanner;
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        SignIn.login(scanner);
+        
+        Store store = new Store();
+        CheckOut checkOut = new CheckOut();
+
+        // Add prices for each shoe
+        HashMap<String, Double> shoePrices = new HashMap<>();
+        int shoeNumber = 1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                shoePrices.put("Shoe " + shoeNumber, 60.0 + (shoeNumber * 2));
+                shoeNumber++;
+            }
+        }
+
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("\n--- Nike Store Menu ---");
+            System.out.println("1. View All Shoes");
+            System.out.println("2. Choose Shoe and Add to Cart");
+            System.out.println("3. View Cart / Checkout");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    store.storeOptions();
+                    break;
+                case "2":
+                    store.storeOptions();
+                    store.chooseShoes();
+                    String selectedShoe = store.shoeDescription(0, 0); 
+                    System.out.print("Enter the shoe name again to confirm: ");
+                    selectedShoe = scanner.nextLine();
+                    double price = shoePrices.getOrDefault(selectedShoe, 0.0);
+                    if (price > 0) {
+                    	checkOut.addItem(selectedShoe, price);
+                    } else {
+                        System.out.println("Shoe not found or invalid name.");
+                    }
+                    break;
+                case "3":
+                	checkOut.printCart();
+                    break;
+                case "4":
+                    System.out.println("Thank you for visiting our Nike Store!");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+
+        scanner.close();
+    }
+}
