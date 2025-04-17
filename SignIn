@@ -1,0 +1,21 @@
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class SignIn {
+    private static HashSet<String> users = new HashSet<>();
+
+    public static void login(Scanner scanner) {
+        System.out.print("Enter username: ");
+        String user = scanner.nextLine();
+
+        System.out.print("Enter password: ");
+        scanner.nextLine(); 
+
+        if (users.contains(user)) {
+            System.out.println("Welcome back, " + user + "!");
+        } else {
+            users.add(user);
+            System.out.println("Account created. Welcome, " + user + "!");
+        }
+    }
+}
