@@ -1,0 +1,102 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class StoreControl {
+    private Store store;
+    private CheckOut checkOut;
+    private HashMap<String, Double> shoePrices;
+
+    public StoreControl() {
+        store = new Store();
+        checkOut = new CheckOut();
+        shoePrices = new HashMap<>();
+
+        int shoeNumber = 1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                shoePrices.put("Shoe " + shoeNumber, 60.0 + (shoeNumber * 2));
+                shoeNumber++;
+            }
+        }
+    }
+
+    public void runStore(Scanner scanner) {
+        SignIn.login(scanner);
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("\n--- Nike Store Menu ---");
+            System.out.println("1. View All Shoes");
+            System.out.println("2. Choose Shoe and Add to Cart");
+            System.out.println("3. View Cart / Checkout");
+            System.out.println("4. Return Item from Cart");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            String choice = scanner.nextLine();
+
+            if (choice.equals("1")) {
+                viewShoes();
+            } else if (choice.equals("2")) {
+                addToCart(scanner);
+            } else if (choice.equals("3")) {
+                checkOut.printCart();
+            } else if (choice.equals("4")) {
+                returnItem(scanner);
+            } else if (choice.equals("5")) {
+                System.out.println("Thank you for visiting our Nike Store!");
+                exit = true;
+            } else {
+                System.out.println("Invalid option.");
+            }
+        }
+    }
+
+    private void viewShoes() {
+        store.storeOptions();
+    }
+
+    private void addToCart(Scanner scanner) {
+        store.storeOptions();
+        store.chooseShoes();
+        String selectedShoe = store.getSelectedShoe(); 
+        
+        double price = shoePrices.getOrDefault(selectedShoe, 0.0);
+        if (price > 0) {
+            checkOut.addItem(selectedShoe, price);
+        } else {
+            System.out.println("Shoe not found or invalid name.");
+        }
+    }
+
+    private void returnItem(Scanner scanner) {
+        checkOut.printCart();
+        if (checkOut.getCartSize() == 0) {
+            System.out.println("Your cart is empty. Nothing to return.");
+            return;
+        }
+
+        System.out.print("Enter the number of the item to return (starting from 1): ");
+        String input = scanner.nextLine();
+
+ 
+        boolean isNumeric = true;
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                isNumeric = false;
+                break;
+            }
+        }
+
+        if (isNumeric) {
+            int index = Integer.parseInt(input) - 1;
+            if (index >= 0 && index < checkOut.getCartSize()) {
+                checkOut.removeItem(index);
+                System.out.println("Item removed from your cart.");
+            } else {
+                System.out.println("Invalid index.");
+            }
+        } else {
+            System.out.println("Invalid input. Please enter a number.");
+        }
+    }
+}
