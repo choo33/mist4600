@@ -1,6 +1,8 @@
-
+import java.util.HashMap;
 
 public class Shoes extends Products {
+    private HashMap<String, Integer> inventory = new HashMap<>();
+
     public Shoes() {
         productOptions = new String[][] {
             {"Shoe 1", "Shoe 2", "Shoe 3", "Shoe 4", "Shoe 5"},
@@ -13,6 +15,12 @@ public class Shoes extends Products {
             {200.0, 120.0, 180.0, 165.0, 95.0},
             {200.0, 100.0, 150.0, 120.0, 200.0}
         };
+
+        for (int i = 0; i < productOptions.length; i++) {
+            for (int j = 0; j < productOptions[i].length; j++) {
+                inventory.put(productOptions[i][j], 2); 
+            }
+        }
     }
 
     @Override
@@ -21,9 +29,26 @@ public class Shoes extends Products {
         int row = scnr.nextInt();
         System.out.print("Enter Column (0-4): ");
         int col = scnr.nextInt();
+        scnr.nextLine(); 
 
-        selectedProduct = productOptions[row][col];
-        selectedProductPrice = prices[row][col];
-        System.out.println("Selected Shoe: " + selectedProduct + " | Price: $" + selectedProductPrice);
+        String product = productOptions[row][col];
+
+        if (inventory.get(product) > 0) {
+            selectedProduct = product;
+            selectedProductPrice = prices[row][col];
+            inventory.put(product, inventory.get(product) - 1); 
+            System.out.println("Selected Shoe: " + selectedProduct + " | Price: $" + selectedProductPrice);
+        } else {
+            System.out.println("Sorry, " + product + " is out of stock!");
+            selectedProduct = null;
+            selectedProductPrice = 0.0;
+        }
+    }
+
+    public void printInventory() {
+        System.out.println("\n--- Shoe Inventory ---");
+        for (String product : inventory.keySet()) {
+            System.out.println(product + " - Qty: " + inventory.get(product));
+        }
     }
 }
