@@ -29,8 +29,7 @@ public class StoreControl {
             System.out.println("1. View All Shoes");
             System.out.println("2. Choose Shoe and Add to Cart");
             System.out.println("3. View Cart / Checkout");
-            System.out.println("4. Return Item from Cart");
-            System.out.println("5. Exit");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
@@ -41,8 +40,6 @@ public class StoreControl {
             } else if (choice.equals("3")) {
                 checkOut.printCart();
             } else if (choice.equals("4")) {
-                returnItem(scanner);
-            } else if (choice.equals("5")) {
                 System.out.println("Thank you for visiting our Nike Store!");
                 exit = true;
             } else {
@@ -67,19 +64,4 @@ public class StoreControl {
             System.out.println("Shoe not found or invalid name.");
         }
     }
-
-    private void returnItem(Scanner scanner) {
-        checkOut.printCart();
-
-        if (checkOut.getCartSize() == 0) {
-            System.out.println("Your cart is empty. Nothing to return.");
-            return;
-        }
-
-        System.out.print("Enter the number of the item to return (starting from 0): ");
-        int index = Integer.parseInt(scanner.nextLine());
-
-        checkOut.removeItem(index);
-        System.out.println("Item removed from your cart.");
-    }
-    }
+ }
