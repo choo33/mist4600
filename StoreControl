@@ -11,13 +11,19 @@ public class StoreControl {
         checkOut = new CheckOut();
         shoePrices = new HashMap<>();
 
-        int shoeNumber = 1;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 5; j++) {
-                shoePrices.put("Shoe " + shoeNumber, 60.0 + (shoeNumber * 2));
-                shoeNumber++;
-            }
-        }
+        Double[][] prices = {
+        	    {100.0, 120.0, 240.0, 135.0, 90.0},
+        	    {200.0, 120.0, 180.0, 165.0, 95.0},
+        	    {200.0, 100.0, 150.0, 120.0, 200.0}
+        	};
+
+        	int shoeNumber = 1;
+        	for (int i = 0; i < 3; i++) {
+        	    for (int j = 0; j < 5; j++) {
+        	        shoePrices.put("Shoe " + shoeNumber, prices[i][j]);
+        	        shoeNumber++;
+        	    }
+        	}
     }
 
     public void runStore(Scanner scanner) {
