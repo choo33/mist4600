@@ -16,13 +16,18 @@ public class StoreControl {
 	private void addToCartShoes() {
 	    shoes.storeOptions();
 	    shoes.chooseProduct();
-	    checkOut.addItem(shoes.getSelectedProduct(), shoes.getSelectedProductPrice());
+	    if (shoes.getSelectedProduct() != null) {
+	        checkOut.addItem(shoes.getSelectedProduct(), shoes.getSelectedProductPrice());
+	    }
+
 	}
 
 	private void addToCartShirts() {
 	    shirts.storeOptions();
 	    shirts.chooseProduct();
+	    if (shirts.getSelectedProduct() != null) {
 	    checkOut.addItem(shirts.getSelectedProduct(), shirts.getSelectedProductPrice());
+	    }
 	}
 
     public void runStore(Scanner scanner) {
