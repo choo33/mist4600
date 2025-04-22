@@ -2,12 +2,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class StoreControl {
-    private Store store;
+    private Shoes shoes;
     private CheckOut checkOut;
     private HashMap<String, Double> shoePrices;
 
     public StoreControl() {
-        store = new Store();
+        shoes = new Shoes();
         checkOut = new CheckOut();
         shoePrices = new HashMap<>();
 
@@ -49,13 +49,13 @@ public class StoreControl {
     }
 
     private void viewShoes() {
-        store.storeOptions();
+        shoes.storeOptions();
     }
 
     private void addToCart(Scanner scanner) {
-        store.storeOptions();
-        store.chooseShoes();
-        String selectedShoe = store.getSelectedShoe(); 
+        shoes.storeOptions();
+        shoes.chooseShoes();
+        String selectedShoe = shoes.getSelectedShoe(); 
         
         Double price = shoePrices.get(selectedShoe);
         if (price == null) {
