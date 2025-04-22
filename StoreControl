@@ -57,7 +57,10 @@ public class StoreControl {
         store.chooseShoes();
         String selectedShoe = store.getSelectedShoe(); 
         
-        double price = shoePrices.getOrDefault(selectedShoe, 0.0);
+        Double price = shoePrices.get(selectedShoe);
+        if (price == null) {
+            price = 0.0;
+        }
         if (price > 0) {
             checkOut.addItem(selectedShoe, price);
         } else {
