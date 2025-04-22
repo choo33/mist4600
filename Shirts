@@ -1,6 +1,7 @@
-
+import java.util.HashMap;
 
 public class Shirts extends Products {
+    private HashMap<String, Integer> inventory = new HashMap<>();
 
     public Shirts() {
         productOptions = new String[][] {
@@ -14,18 +15,41 @@ public class Shirts extends Products {
             {85.0, 75.0, 105.0, 115.0, 100.0},
             {70.0, 85.0, 95.0, 100.0, 110.0}
         };
+
+
+        for (int i = 0; i < productOptions.length; i++) {
+            for (int j = 0; j < productOptions[i].length; j++) {
+                inventory.put(productOptions[i][j], 2);
+            }
+        }
     }
 
     @Override
     public void chooseProduct() {
         System.out.print("Enter Row (0-2): ");
         int row = scnr.nextInt();
-
         System.out.print("Enter Column (0-4): ");
         int col = scnr.nextInt();
+        scnr.nextLine(); 
 
-        selectedProduct = productOptions[row][col];
-        selectedProductPrice = prices[row][col];
-        System.out.println("Selected Shirt: " + selectedProduct + " | Price: $" + selectedProductPrice);
+        String product = productOptions[row][col];
+
+        if (inventory.get(product) > 0) {
+            selectedProduct = product;
+            selectedProductPrice = prices[row][col];
+            inventory.put(product, inventory.get(product) - 1);
+            System.out.println("Selected Shirt: " + selectedProduct + " | Price: $" + selectedProductPrice);
+        } else {
+            System.out.println("Sorry, " + product + " is out of stock!");
+            selectedProduct = null;
+            selectedProductPrice = 0.0;
+        }
+    }
+
+    public void printInventory() {
+        System.out.println("\n--- Shirt Inventory ---");
+        for (String product : inventory.keySet()) {
+            System.out.println(product + " - Qty: " + inventory.get(product));
+        }
     }
 }
