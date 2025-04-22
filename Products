@@ -2,11 +2,16 @@ import java.util.*;
 public class Products{
 	protected String selectedShoe;
 	protected Double selectedShoePrice;
+	protected String selectedShirt;
+	protected Double selectedShirtPrice;
 	Scanner scnr = new Scanner (System.in);
 
 	String [] [] shoesOptions = {{"Shoe 1",  "Shoe 2",  "Shoe 3",  "Shoe 4",  "Shoe 5"},
 			 					 {"Shoe 6",  "Shoe 7",  "Shoe 8",  "Shoe 9",  "Shoe 10"},
 			 					 {"Shoe 11", "Shoe 12", "Shoe 13", "Shoe 14", "Shoe 15"}};
+	String [] [] shirtOptions = {{"Shirt 1",  "Shirt 2",  "Shirt 3",  "Shirt 4",  "Shirt 5"},
+			 					 {"Shirt 6",  "Shirt 7",  "Shirt 8",  "Shirt 9",  "Shirt 10"},
+			 					 {"Shirt 11", "Shirt 12", "Shirt 13", "Shirt 14", "Shirt 15"}};
 	Double [] [] prices = {{100.0, 120.0, 240.0, 135.0, 90.0},
 						   {200.0, 120.0, 180.0, 165.0, 95.0},
 						   {200.0, 100.0, 150.0, 120.0, 200.0}};
@@ -26,9 +31,23 @@ public class Products{
 			System.out.println("_________________________________________________________________________________________________");
 			System.out.println();
 		}		
+		
+		System.out.println(" Types of Shirts: ");
+		System.out.println();
+		System.out.println();
+		
+		
+		for (int i = 0; i < shirtOptions.length; i++) {
+			System.out.print("|");
+			for (int j = 0; j < shirtOptions[i].length; j++) {
+				System.out.printf ("| %-15s |", shirtOptions[i][j]);
+			}
+			System.out.println("|");
+			System.out.println("_________________________________________________________________________________________________");
+			System.out.println();
+		
+	}
 	}
 	
-	
 }
-
 
