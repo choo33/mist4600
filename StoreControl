@@ -2,12 +2,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class StoreControl {
-    private Shoes shoes;
+    private Products products;
     private CheckOut checkOut;
     private HashMap<String, Double> shoePrices;
 
     public StoreControl() {
-        shoes = new Shoes();
+        products = new Products();
         checkOut = new CheckOut();
         shoePrices = new HashMap<>();
 
@@ -32,20 +32,23 @@ public class StoreControl {
 
         while (!exit) {
             System.out.println("\n--- Nike Store Menu ---");
-            System.out.println("1. View All Shoes");
+            System.out.println("1. View All Products");
             System.out.println("2. Choose Shoe and Add to Cart");
-            System.out.println("3. View Cart / Checkout");
-            System.out.println("4. Exit");
+            System.out.println("3. Choose Shirt and Add to Cart");
+            System.out.println("4. View Cart / Checkout");
+            System.out.println("5. Exit");
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
             if (choice.equals("1")) {
-                viewShoes();
+                viewProducts();
             } else if (choice.equals("2")) {
-                addToCart(scanner);
+                addToCartShoes(scanner);
             } else if (choice.equals("3")) {
-                checkOut.printCart();
+            	addToCartShirts(scanner);
             } else if (choice.equals("4")) {
+                checkOut.printCart();
+            } else if (choice.equals("5")) {
                 System.out.println("Thank you for visiting our Nike Store!");
                 exit = true;
             } else {
@@ -54,14 +57,14 @@ public class StoreControl {
         }
     }
 
-    private void viewShoes() {
-        shoes.storeOptions();
+    private void viewProducts() {
+        products.storeOptions();
     }
 
-    private void addToCart(Scanner scanner) {
-        shoes.storeOptions();
-        shoes.chooseShoes();
-        String selectedShoe = shoes.getSelectedShoe(); 
+    private void addToCartShoes(Scanner scanner) {
+        products.storeOptions();
+        products.chooseShoes();
+        String selectedShoe = products.getSelectedShoe(); 
         
         Double price = shoePrices.get(selectedShoe);
         if (price == null) {
@@ -73,4 +76,23 @@ public class StoreControl {
             System.out.println("Shoe not found or invalid name.");
         }
     }
+    
+    private void addToCartShirts(Scanner scanner) {
+        products.storeOptions();
+        products.chooseShirts();
+        String selectedShoe = products.getSelectedShirt(); 
+        
+        Double price = shoePrices.get(selectedShoe);
+        if (price == null) {
+            price = 0.0;
+        }
+        if (price > 0) {
+            checkOut.addItem(selectedShoe, price);
+        } else {
+            System.out.println("Shoe not found or invalid name.");
+        }
+    }
+    
+    
+    
  }
