@@ -1,0 +1,53 @@
+
+public class Shirts extends Products{
+
+	
+	public void chooseShirt() {
+		System.out.println("Enter Row (0-2): ");
+		int row;
+		while (true) {
+			row = scnr.nextInt();
+			if ((row >= 0) && (row < shirtOptions.length))
+				break;
+			else 
+				System.out.println("Enter a valid row number");
+		}
+		
+		System.out.println("Enter Column (0-4): ");
+		int column;
+		while (true) {
+			column = scnr.nextInt();
+			if ((column >= 0) && (column < shirtOptions[0].length))
+				break;
+			else 
+				System.out.println("Enter a valid column number");
+		}
+	selectedShirt = shirtDescription(row, column);
+	selectedShirtPrice = shirtPrice (row, column);
+    printDescription(); 
+	}
+	
+    
+    public String shirtDescription(int row, int column) {
+        return shirtOptions[row][column];
+    }
+    
+    public Double shirtPrice(int row, int column) {
+        return prices[row][column];
+    }
+    
+    public void printDescription() {
+        System.out.println("Selected Shirts: " + selectedShirt);
+        System.out.println("Price: " + selectedShirtPrice);
+        
+    }
+		
+    protected String selectedShirt;
+	
+	
+	public String getSelectedShirt() {
+	    return selectedShirt;
+	}
+}
+
+
