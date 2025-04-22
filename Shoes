@@ -1,51 +1,29 @@
 
-public class Shoes extends Products {
 
-	
-	public void chooseShoes() {
-		System.out.println("Enter Row (0-2): ");
-		int row;
-		while (true) {
-			row = scnr.nextInt();
-			if ((row >= 0) && (row < shoesOptions.length))
-				break;
-			else 
-				System.out.println("Enter a valid row number");
-		}
-		
-		System.out.println("Enter Column (0-4): ");
-		int column;
-		while (true) {
-			column = scnr.nextInt();
-			if ((column >= 0) && (column < shoesOptions[0].length))
-				break;
-			else 
-				System.out.println("Enter a valid column number");
-		}
-	selectedShoe = shoeDescription(row, column);
-	selectedShoePrice = shoePrice (row, column);
-    printDescription();
-	}
-	
-    
-    public String shoeDescription(int row, int column) {
-        return shoesOptions[row][column];
+public class Shoes extends Products {
+    public Shoes() {
+        productOptions = new String[][] {
+            {"Shoe 1", "Shoe 2", "Shoe 3", "Shoe 4", "Shoe 5"},
+            {"Shoe 6", "Shoe 7", "Shoe 8", "Shoe 9", "Shoe 10"},
+            {"Shoe 11", "Shoe 12", "Shoe 13", "Shoe 14", "Shoe 15"}
+        };
+
+        prices = new Double[][] {
+            {100.0, 120.0, 240.0, 135.0, 90.0},
+            {200.0, 120.0, 180.0, 165.0, 95.0},
+            {200.0, 100.0, 150.0, 120.0, 200.0}
+        };
     }
-    
-    public Double shoePrice(int row, int column) {
-        return prices[row][column];
+
+    @Override
+    public void chooseProduct() {
+        System.out.print("Enter Row (0-2): ");
+        int row = scnr.nextInt();
+        System.out.print("Enter Column (0-4): ");
+        int col = scnr.nextInt();
+
+        selectedProduct = productOptions[row][col];
+        selectedProductPrice = prices[row][col];
+        System.out.println("Selected Shoe: " + selectedProduct + " | Price: $" + selectedProductPrice);
     }
-    
-    public void printDescription() {
-        System.out.println("Selected Shoes: " + selectedShoe);
-        System.out.println("Price: " + selectedShoePrice);
-        
-    }
-		
-    protected String selectedShoe;
-	
-	
-	public String getSelectedShoe() {
-	    return selectedShoe;
-	}
 }
